@@ -1,26 +1,41 @@
 package rf.tienda.dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import rf.tienda.exception.DomainException;
 import rf.tienda.util.Validator;
 
 /**
  * 
- * Nombre		Categoria
+ * Nom	bre		Categoria
  * Descripcion	Lista de categorías
  * @author 		Miguel Garcia
  * @version		13 de abr. de 2016
  *
  */
+@Entity
+@Table(name = "categoria")
+
 public class Categoria {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id_categoria; //identificador categoria
 	
-	private int id_categoria;			//identificador categoria
+	@Column(name = "nombre", nullable = false)
+	private String cat_nombre; //nombre de la categoria
 	
-	private String cat_nombre;			//nombre de la categoria
+	@Column(name = "descripcion")
+	private String cat_descripcion; //descripcion de la categoria
 	
-	private String cat_descripcion;		//descripcion de la categoria
-	
-	
-	public Categoria(){}
-	
+	public Categoria(){
+		
+	}
 	
 	public boolean isValid(){	
 		return !Validator.isVacio(cat_nombre) &&
@@ -53,10 +68,15 @@ public class Categoria {
 	
 	/**
 	 * Setter para el nombre de categoria
+	 * @throws DomainException 
 	 * 
 	 */
-	public void setCat_nombre(String cat_nombre) {
-		this.cat_nombre = cat_nombre;
+	public void setCat_nombre(String cat_nombre) throws DomainException{
+		if (Validator.cumpleLongitud(cat_nombre, 5, 50)) {
+			this.cat_nombre = cat_nombre;
+		}else{
+			throw new DomainException("Error");
+		}
 	}
 	
 	/**
@@ -69,10 +89,15 @@ public class Categoria {
 	
 	/**
 	 * setter para la descripcion de categoria
+	 * @throws DomainException 
 	 * 
 	 */
-	public void setCat_descripcion(String cat_descripcion) {
-		this.cat_descripcion = cat_descripcion;
+	public void setCat_descripcion(String cat_descripcion) throws DomainException{
+		if (Validator.cumpleLongitudMax(cat_descripcion, 200)) {
+			this.cat_descripcion = cat_descripcion;
+		}else {
+			throw new DomainException("Error");
+		}
 	}
 
 
