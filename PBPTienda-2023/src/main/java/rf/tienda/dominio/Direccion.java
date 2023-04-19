@@ -1,8 +1,11 @@
 package rf.tienda.dominio;
 
+import javax.persistence.Entity;
+
 import rf.tienda.exception.DomainException;
 import rf.tienda.util.Validator;
 
+@Entity
 public class Direccion { 
 	
 	private String dir_nombre; 

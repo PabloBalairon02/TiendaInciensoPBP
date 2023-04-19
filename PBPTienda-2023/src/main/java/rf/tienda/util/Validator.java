@@ -52,6 +52,8 @@ public class Validator {
 	 * Longitud que debe tener todo DNI pasado a la aplicaci�n.
 	 */
 	private final static int LONGITUD_DNI = 12;
+	
+	private final static String IDPRODUCTO = "^[A-Z0-9]{5}$";
 
 	/* ***************************************************************************************
 	 * NOMBRE: isAlfanumeric                                                                 *
@@ -276,7 +278,7 @@ public class Validator {
 	 */
 	
 	public static boolean valDateMin(LocalDate fecha, LocalDate min){
-		return fecha.compareTo(min) > 0;
+		return fecha.compareTo(min) >= 0;
 	}
 	
 	/**
@@ -286,7 +288,7 @@ public class Validator {
 	 * @return
 	 */
 	public static boolean valDateMax(LocalDate fecha, LocalDate max){
-		return fecha.compareTo(max) < 0;
+		return fecha.compareTo(max) <= 0;
 		
 	}	
 	
@@ -317,6 +319,17 @@ public class Validator {
 		Pattern miPattern = Pattern.compile(PASSWORD_PATTERN);
 
 		Matcher matcher = miPattern.matcher(password);
+
+		if (matcher.find()) {
+			return true;
+		}
+		return false;	
+	}
+	
+	public static boolean idProductoValido(String id_producto) {
+		Pattern miPattern = Pattern.compile(IDPRODUCTO);
+
+		Matcher matcher = miPattern.matcher(id_producto);
 
 		if (matcher.find()) {
 			return true;

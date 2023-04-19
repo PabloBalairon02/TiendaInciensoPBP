@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: rf.tienda.dominio.CategoriaTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in rf.tienda.dominio.CategoriaTest
+testSetCat_descripcion  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Not yet implemented
+	at rf.tienda.dominio.CategoriaTest.testSetCat_descripcion(CategoriaTest.java:21)
+
+testSetCat_nombre  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Not yet implemented
+	at rf.tienda.dominio.CategoriaTest.testSetCat_nombre(CategoriaTest.java:16)
+
+testSetId_categoria  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Not yet implemented
+	at rf.tienda.dominio.CategoriaTest.testSetId_categoria(CategoriaTest.java:11)
+

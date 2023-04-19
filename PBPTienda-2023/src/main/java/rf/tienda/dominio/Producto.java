@@ -1,5 +1,6 @@
 package rf.tienda.dominio;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import rf.tienda.exception.DomainException;
 import rf.tienda.util.Validator;
 
@@ -15,7 +18,7 @@ import rf.tienda.util.Validator;
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id_producto; 
+	private String id_producto; 
 	
 	@Column(name = "descripcion corta", nullable = false)
 	private String pro_descripcion;
@@ -30,24 +33,25 @@ public class Producto {
 	private int pro_stock; 
 	
 	@Column(name = "fecha prevista", nullable=false)
-	private Date pro_fecRepos; 
+	private LocalDate pro_fecRepos; 
 	
 	@Column(name = "fecha activacion", nullable=false)
-	private Date pro_fecActi; 
+	private LocalDate pro_fecActi; 
 	
 	@Column(name = "fecha desactivacion", nullable=false)
-	private Date pro_fecDesacti; 
+	private LocalDate pro_fecDesacti; 
 	
-	@Column(name = "unidad de venta")
+	@Column(name = "unidad de venta", nullable=false)
 	private String pro_uniVenta; 
 	
 	@Column(name = "cantidad de unidades")
+	@ColumnDefault("INTEGER DEFAULT 0")
 	private double pro_cantXUniVenta; 
 	
 	@Column(name = "unidad ultima")
 	private String pro_uniUltNivel;
 	
-	@Column(name = "pais de origen")
+	@Column(name = "pais de origen", nullable=false)
 	private int id_pais; 
 	
 	@Column(name = "uso recomendado")
@@ -57,23 +61,31 @@ public class Producto {
 	private int id_categoria; 
 	
 	@Column(name = "stock reservado")
+	@ColumnDefault("INTEGER DEFAULT 0")
 	private int pro_stkReservado; 
 	
 	@Column(name = "stock para nivel alto")
+	@ColumnDefault("INTEGER DEFAULT 0")
 	private int pro_nStkAlto; 
 	
 	@Column(name = "stock para nivel bajo")
+	@ColumnDefault("INTEGER DEFAULT 0")
 	private int pro_nStkBajo; 
 	
 	@Column(name = "estado")
+	@ColumnDefault("A")
 	private char pro_stat;
-
-	public int getId_producto() {
+	
+	public Producto(){
+		
+	}
+	
+	public String getId_producto() {
 		return id_producto;
 	}
 
-	public void setId_producto(int id_producto) throws DomainException {
-		if(Validator.cumpleLongitudMax(pro_desLarga, 5)) {
+	public void setId_producto(String id_producto) throws DomainException {
+		if(Validator.idProductoValido(id_producto)) {
 			this.id_producto = id_producto;
 		}else {
 			throw new DomainException("Error");
@@ -109,8 +121,12 @@ public class Producto {
 		return pro_precio;
 	}
 
-	public void setPro_precio(double pro_precio) {
-		this.pro_precio = pro_precio;
+	public void setPro_precio(double pro_precio) throws DomainException {
+		if(Validator.cumpleRango(pro_precio,0,100)) {
+			this.pro_precio = pro_precio;
+		}else {
+			throw new DomainException("Error");
+		}
 	}
 
 	public int getPro_stock() {
@@ -121,27 +137,36 @@ public class Producto {
 		this.pro_stock = pro_stock;
 	}
 
-	public Date getPro_fecRepos() {
+	public LocalDate getPro_fecRepos() {
 		return pro_fecRepos;
 	}
 
-	public void setPro_fecRepos(Date pro_fecRepos) {
-		this.pro_fecRepos = pro_fecRepos;
+	public void setPro_fecRepos(LocalDate pro_fecRepos) throws DomainException {
+		if(Validator.valDateMin(pro_fecRepos, LocalDate.now())) {
+			this.pro_fecRepos = pro_fecRepos;
+		}else {
+			throw new DomainException("Error");
+		}
 	}
 
-	public Date getPro_fecActi() {
+	public LocalDate getPro_fecActi() {
 		return pro_fecActi;
 	}
 
-	public void setPro_fecActi(Date pro_fecActi) {
-		this.pro_fecActi = pro_fecActi;
+	public void setPro_fecActi(LocalDate pro_fecActi) throws DomainException {
+		if(Validator.valDateMin(pro_fecActi, LocalDate.now())) {
+			this.pro_fecActi = pro_fecActi;
+		}else {
+			throw new DomainException("Error");
+		}
+		
 	}
 
-	public Date getPro_fecDesacti() {
+	public LocalDate getPro_fecDesacti() {
 		return pro_fecDesacti;
 	}
 
-	public void setPro_fecDesacti(Date pro_fecDesacti) {
+	public void setPro_fecDesacti(LocalDate pro_fecDesacti) {
 		this.pro_fecDesacti = pro_fecDesacti;
 	}
 

@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+Test set: rf.tienda.util.ValidatorTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 3, Errors: 2, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in rf.tienda.util.ValidatorTest
+testIsEmailValido  Time elapsed: 0 s  <<< ERROR!
+java.util.regex.PatternSyntaxException: 
+Unclosed character class near index 13
+[^[0-9]{9,20}$
+             ^
+	at rf.tienda.util.ValidatorTest.testIsEmailValido(ValidatorTest.java:33)
+
+testCumplePhoneNumber  Time elapsed: 0 s  <<< ERROR!
+java.util.regex.PatternSyntaxException: 
+Unclosed character class near index 13
+[^[0-9]{9,20}$
+             ^
+	at rf.tienda.util.ValidatorTest.testCumplePhoneNumber(ValidatorTest.java:27)
+
+testCumpleLongitudMax  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at rf.tienda.util.ValidatorTest.testCumpleLongitudMax(ValidatorTest.java:63)
+
+testCumpleLongitudMin  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	at rf.tienda.util.ValidatorTest.testCumpleLongitudMin(ValidatorTest.java:58)
+
+testCumpleDNI  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at rf.tienda.util.ValidatorTest.testCumpleDNI(ValidatorTest.java:39)
+

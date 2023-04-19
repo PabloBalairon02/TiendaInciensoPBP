@@ -32,7 +32,7 @@ public class CategoriaServicios implements ICategoriaServicios{
 	public ResponseEntity actualizarCategoria(Categoria categoriaNueva, Integer id) throws DomainException {
 		Optional<Categoria> categoria = categoriaRepository.findById(id);
 		if(!categoria.isPresent()) {
-			return new ResponseEntity("No existe el juego con ese id", HttpStatus.NOT_FOUND) ;
+			return new ResponseEntity("No existe la categoria con ese id", HttpStatus.NOT_FOUND) ;
 		}
 		categoria.get().setCat_nombre(categoriaNueva.getCat_nombre());
 		categoria.get().setCat_descripcion(categoriaNueva.getCat_descripcion());
@@ -44,8 +44,8 @@ public class CategoriaServicios implements ICategoriaServicios{
 
 	@Override
 	public ResponseEntity eliminarCategoria(Integer id) {
-		Optional<Categoria> videojuego = categoriaRepository.findById(id);
-		if(!videojuego.isPresent()) {
+		Optional<Categoria> producto = categoriaRepository.findById(id);
+		if(!producto.isPresent()) {
 			return new ResponseEntity("No existe la categoria con ese id", HttpStatus.NOT_FOUND) ;
 		}
 	
